@@ -23,16 +23,13 @@ public class DetalleVenta {
     private Long id;
 
     private Integer cantidad;
+
     private Double precioUnitario;
 
-    // Relación con Venta
-    @ManyToOne
-    @JoinColumn(name = "venta_id")
-    private Venta venta;
+    private Double subtotal;
 
     // Relación con Producto
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
-
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class Venta {
 
     private LocalDate fecha;
 
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "venta_id")  
     private List<DetalleVenta> detalleVentas = new ArrayList<>();
-
 }
