@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 public class DetalleVentaServiceImpl implements IService<DetalleVenta> {
 
     private final DetalleVentaRepository detalleVentaRepository;
-    private final ProductoServiceImpl productoServiceImpl;
+    // private final ProductoServiceImpl productoServiceImpl;
 
     @Override
     public DetalleVenta encontrar(Long id) {
@@ -30,11 +30,7 @@ public class DetalleVentaServiceImpl implements IService<DetalleVenta> {
     
     @Override
     public DetalleVenta crear(DetalleVenta data) {
-        
         // Producto productoDetalle = productoServiceImpl.encontrar(data.getProducto().getId());
-        
-
-
         return null;
     }
 

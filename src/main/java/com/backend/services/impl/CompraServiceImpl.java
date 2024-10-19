@@ -34,9 +34,6 @@ public class CompraServiceImpl implements IService<Compra> {
 
     @Override
     public Compra actualizar(Long id, Compra data) {
-        
-
-
         return null;
     }
 
