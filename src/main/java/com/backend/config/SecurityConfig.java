@@ -45,15 +45,15 @@ public class SecurityConfig {
             // http.requestMatchers(HttpMethod.PUT, "/**").permitAll();
 
             http.requestMatchers(HttpMethod.POST, "/usuario/create").permitAll();
-            // String[] paths = {"/venta/**", "/producto/**", "/venta/**"};
-            // String[] roles = {"ADMINISTRADOR", "VENDEDOR"};
-            // for (String path : paths) {
-            //     http.requestMatchers(HttpMethod.GET, path).hasAnyRole(roles);
-            //     http.requestMatchers(HttpMethod.POST, path).hasAnyRole(roles);
-            //     http.requestMatchers(HttpMethod.PUT, path).hasAnyRole(roles);
-            //     http.requestMatchers(HttpMethod.DELETE, path).hasAnyRole(roles);
-            // }
-            // http.anyRequest().hasRole("ADMINISTRADOR");
+            String[] paths = {"/venta/**", "/producto/**", "/venta/**"};
+            String[] roles = {"ADMINISTRADOR", "VENDEDOR"};
+            for (String path : paths) {
+                http.requestMatchers(HttpMethod.GET, path).hasAnyRole(roles);
+                http.requestMatchers(HttpMethod.POST, path).hasAnyRole(roles);
+                http.requestMatchers(HttpMethod.PUT, path).hasAnyRole(roles);
+                http.requestMatchers(HttpMethod.DELETE, path).hasAnyRole(roles);
+            }
+            http.anyRequest().hasRole("ADMINISTRADOR");
         })
         .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
         .build();
