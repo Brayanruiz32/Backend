@@ -37,23 +37,23 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         
         .authorizeHttpRequests(http -> {
-            // http.requestMatchers(HttpMethod.GET, "swagger-ui.html").permitAll();
-            // http.requestMatchers(HttpMethod.POST, "/usuario/login").permitAll();
-            http.requestMatchers(HttpMethod.DELETE, "/**").permitAll();
-            http.requestMatchers(HttpMethod.GET, "/**").permitAll();
-            http.requestMatchers(HttpMethod.POST, "/**").permitAll();
-            http.requestMatchers(HttpMethod.PUT, "/**").permitAll();
+            
+            http.requestMatchers(HttpMethod.POST, "/autenticacion/login").permitAll();
+            // http.requestMatchers(HttpMethod.DELETE, "/**").permitAll();
+            // http.requestMatchers(HttpMethod.GET, "/**").permitAll();
+            // http.requestMatchers(HttpMethod.POST, "/**").permitAll();
+            // http.requestMatchers(HttpMethod.PUT, "/**").permitAll();
 
-
-            // String[] paths = {"/categoria/**", "/producto/**", "/usuario/**", "/rol/**", "/venta/**"};
-            // String[] roles = {"ADMINISTRATIVO", "DESARROLLADOR"};
-            // for (String path : paths) {
-            //     http.requestMatchers(HttpMethod.GET, path).hasAnyRole("CLIENTE","INVITADO");
-            //     http.requestMatchers(HttpMethod.POST, path).hasAnyRole(roles);
-            //     http.requestMatchers(HttpMethod.PUT, path).hasAnyRole(roles);
-            //     http.requestMatchers(HttpMethod.DELETE, path).hasAnyRole(roles);
-            // }
-           
+            http.requestMatchers(HttpMethod.POST, "/usuario/create").permitAll();
+            String[] paths = {"/venta/**", "/producto/**", "/venta/**"};
+            String[] roles = {"ADMINISTRADOR", "VENDEDOR"};
+            for (String path : paths) {
+                http.requestMatchers(HttpMethod.GET, path).hasAnyRole(roles);
+                http.requestMatchers(HttpMethod.POST, path).hasAnyRole(roles);
+                http.requestMatchers(HttpMethod.PUT, path).hasAnyRole(roles);
+                http.requestMatchers(HttpMethod.DELETE, path).hasAnyRole(roles);
+            }
+            http.anyRequest().hasRole("ADMINISTRADOR");
         })
         .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
         .build();
@@ -69,9 +69,7 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider(UsuarioServiceImpl usuarioServiceImpl){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
-
         provider.setUserDetailsService(usuarioServiceImpl);
-   
         return provider;
     }
 
@@ -79,5 +77,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
 }
