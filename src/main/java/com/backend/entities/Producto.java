@@ -31,7 +31,7 @@ public class Producto {
     private Double precio;
 
     //al momento de crear el producto se pone a 0
-    private Integer stock;
+
     
     //relaciones a otras tablas
     

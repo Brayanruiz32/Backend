@@ -25,10 +25,7 @@ public class DetalleCompra {
     private Integer cantidad;
     private Double precioUnitario;
 
-    // Relación con Compra
-    @ManyToOne
-    @JoinColumn(name = "compra_id")
-    private Compra compra;
+
 
     // Relación con Producto
     @ManyToOne

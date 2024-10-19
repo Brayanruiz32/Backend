@@ -45,7 +45,7 @@ public class SecurityConfig {
             // http.requestMatchers(HttpMethod.PUT, "/**").permitAll();
 
             http.requestMatchers(HttpMethod.POST, "/usuario/create").permitAll();
-            String[] paths = {"/venta/**", "/producto/**", "/venta/**"};
+            String[] paths = {"/venta/**", "/producto/**", "/compra/**"};
             String[] roles = {"ADMINISTRADOR", "VENDEDOR"};
             for (String path : paths) {
                 http.requestMatchers(HttpMethod.GET, path).hasAnyRole(roles);
