@@ -26,6 +26,6 @@ public class Proveedor {
     private String email;
     private String nombreComercial;
     private String razonSocial;
-    private String ruc;
+    private TipoDocumento tipoDocumento;
     
 }

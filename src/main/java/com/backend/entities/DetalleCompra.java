@@ -1,5 +1,7 @@
 package com.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,12 +25,12 @@ public class DetalleCompra {
     private Long id;
 
     private Integer cantidad;
-    private Double precioUnitario;
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
  
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "lote_id")
     private Lote lote;

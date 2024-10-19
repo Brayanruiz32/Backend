@@ -41,7 +41,7 @@ public class ProveedorServiceImpl implements IService<Proveedor> {
         proveedorActualizar.setEmail(data.getEmail());
         proveedorActualizar.setNombreComercial(data.getNombreComercial());
         proveedorActualizar.setRazonSocial(data.getRazonSocial());
-        proveedorActualizar.setRuc(data.getRuc());
+        proveedorActualizar.setTipoDocumento(data.getTipoDocumento());
         proveedorActualizar.setTelefono(data.getTelefono());
         return proveedorRepository.save(proveedorActualizar);
     }

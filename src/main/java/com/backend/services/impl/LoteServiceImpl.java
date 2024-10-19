@@ -39,7 +39,7 @@ public class LoteServiceImpl implements  IService<Lote>{
         loteActualizar.setFechaIngreso(data.getFechaIngreso());
         loteActualizar.setFechaVencimiento(data.getFechaVencimiento());
         loteActualizar.setNumeroLote(data.getNumeroLote());
-        loteActualizar.setProducto(data.getProducto());
+
 
         return loteRepository.save(loteActualizar);
     }
