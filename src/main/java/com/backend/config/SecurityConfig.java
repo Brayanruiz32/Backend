@@ -41,6 +41,7 @@ public class SecurityConfig {
         .httpBasic(Customizer.withDefaults())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(http -> {
+            http.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
 
             http.requestMatchers(HttpMethod.POST, "/autenticacion/login").permitAll();
             http.requestMatchers(HttpMethod.POST, "/usuario/create").permitAll();
