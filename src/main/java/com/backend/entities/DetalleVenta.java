@@ -24,11 +24,9 @@ public class DetalleVenta {
 
     private Integer cantidad;
 
-    private Double precioUnitario;
-
     private Double subtotal;
 
-    // Relación con Producto
+    
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;

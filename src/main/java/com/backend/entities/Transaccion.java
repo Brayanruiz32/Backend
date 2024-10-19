@@ -25,7 +25,10 @@ public class Transaccion {
     private Long id;
 
     private Integer cantidad;
+
     private LocalDate fechaTransaccion;
+    
+    private String razonTransaccion;
 
     @ManyToOne
     @JoinColumn(name = "producto_id")

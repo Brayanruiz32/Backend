@@ -27,13 +27,13 @@ public class Lote {
     private String numeroLote;
     private LocalDate fechaIngreso;
     private LocalDate fechaVencimiento;
+    private Integer cantidad;
 
-    // Relación con Producto (Un producto puede tener muchos lotes)
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    // Relación con Almacén (Un lote se almacena en un almacén específico)
+
     @ManyToOne
     @JoinColumn(name = "almacen_id")
     private Almacen almacen;

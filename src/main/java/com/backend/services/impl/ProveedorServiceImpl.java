@@ -37,7 +37,12 @@ public class ProveedorServiceImpl implements IService<Proveedor> {
     public Proveedor actualizar(Long id, Proveedor data) {
         Proveedor proveedorActualizar = proveedorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
         proveedorActualizar.setNombre(data.getNombre());
-        proveedorActualizar.setContacto(data.getContacto());
+        proveedorActualizar.setDireccion(data.getDireccion());
+        proveedorActualizar.setEmail(data.getEmail());
+        proveedorActualizar.setNombreComercial(data.getNombreComercial());
+        proveedorActualizar.setRazonSocial(data.getRazonSocial());
+        proveedorActualizar.setRuc(data.getRuc());
+        proveedorActualizar.setTelefono(data.getTelefono());
         return proveedorRepository.save(proveedorActualizar);
     }
 

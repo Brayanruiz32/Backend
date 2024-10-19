@@ -25,14 +25,10 @@ public class DetalleCompra {
     private Integer cantidad;
     private Double precioUnitario;
 
-
-
-    // Relación con Producto
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
-
-    // Relación con Lote
+ 
     @ManyToOne
     @JoinColumn(name = "lote_id")
     private Lote lote;

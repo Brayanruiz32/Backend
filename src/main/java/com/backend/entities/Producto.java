@@ -30,10 +30,7 @@ public class Producto {
     
     private Double precio;
 
-    //al momento de crear el producto se pone a 0
-
-    
-    //relaciones a otras tablas
+    private Integer stock;
     
     @ManyToOne
     @JoinColumn(name="unidadmedida_id")
