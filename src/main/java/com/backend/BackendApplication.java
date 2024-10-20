@@ -14,7 +14,6 @@ public class BackendApplication{
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
-
 	@Configuration
 	public static class Myconfiguration{
 		@Bean
