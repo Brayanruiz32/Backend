@@ -29,7 +29,11 @@ public class Compra {
     private Long id;
 
     private LocalDate fechaCompra;
-    
+
+    private Fase fase;
+
+    private Double total; 
+
     @ManyToOne
     @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
@@ -37,5 +41,4 @@ public class Compra {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="compra_id")
     private List<DetalleCompra> detalleCompras = new ArrayList<>();
-
 }

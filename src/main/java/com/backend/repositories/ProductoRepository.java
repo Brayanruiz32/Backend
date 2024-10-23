@@ -6,4 +6,8 @@ import com.backend.entities.Producto;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long>{
 
+
+
+
+
 }

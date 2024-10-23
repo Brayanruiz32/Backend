@@ -27,5 +27,6 @@ public class Proveedor {
     private String nombreComercial;
     private String razonSocial;
     private TipoDocumento tipoDocumento;
+    private String numeroDocumento;
     
 }

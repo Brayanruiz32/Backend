@@ -32,6 +32,10 @@ public class LoteController {
     public ResponseEntity<List<Lote>> findAll(){
         return new ResponseEntity<>(loteService.encontrarTodo(), HttpStatus.OK);
     }
+    @GetMapping("/find/lote/{productoId}")
+    public ResponseEntity<List<Lote>> findAllLotesCategoria(@PathVariable Long productoId){
+        return new ResponseEntity<>(loteService.listarLotesPorCategoriaProducto(productoId), HttpStatus.OK);
+    }
     @PostMapping("/create")
     public ResponseEntity<Lote> create(@RequestBody Lote lote){
         return new ResponseEntity<>(loteService.crear(lote), HttpStatus.CREATED);

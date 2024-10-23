@@ -31,6 +31,7 @@ public class Lote {
     private String numeroLote;
     private LocalDate fechaIngreso;
     private LocalDate fechaVencimiento;
+    private Proceso proceso;
 
     @ManyToOne
     @JoinColumn(name = "almacen_id")
@@ -38,5 +39,9 @@ public class Lote {
 
     @OneToMany(mappedBy="lote", cascade = CascadeType.ALL)
     private List<DetalleCompra> detallesCompras = new ArrayList<>();
+
+    @ManyToOne()
+    @JoinColumn(name="categoria_id")
+    private Categoria categoria;
 
 }

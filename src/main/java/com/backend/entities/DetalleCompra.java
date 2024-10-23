@@ -26,6 +26,10 @@ public class DetalleCompra {
 
     private Integer cantidad;
 
+    private Double precioCompra;
+
+    private Double subTotal;
+
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;

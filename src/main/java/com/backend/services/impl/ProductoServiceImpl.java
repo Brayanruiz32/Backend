@@ -35,6 +35,7 @@ public class ProductoServiceImpl implements  IService<Producto> {
     
     @Override
     public Producto crear(Producto data) {
+        data.setStock(0);
         return productoRepository.save(data);
     }
 
@@ -48,8 +49,7 @@ public class ProductoServiceImpl implements  IService<Producto> {
 
         //seteo de data
         productoActualizar.setDescripcion(data.getDescripcion());
-        productoActualizar.setNombre(data.getNombre());
-        productoActualizar.setPrecio(data.getPrecio());
+        productoActualizar.setNombre(data.getNombre());        
         productoActualizar.setCodigoDeBarras(data.getCodigoDeBarras());
         productoActualizar.setCategoria(categoriaProducto);
         productoActualizar.setMarca(marcaProducto);

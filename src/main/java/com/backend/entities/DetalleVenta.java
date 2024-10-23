@@ -26,6 +26,8 @@ public class DetalleVenta {
 
     private Double subtotal;
 
+    //se aplicará una formula
+    private Double precioVenta;
     
     @ManyToOne
     @JoinColumn(name = "producto_id")

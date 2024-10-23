@@ -6,4 +6,6 @@ import com.backend.entities.DetalleCompra;
 
 public interface DetalleCompraRepository extends JpaRepository<DetalleCompra, Long>{
 
+    DetalleCompra findTopByProductoIdOrderByIdDesc(Long productoId);
+
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.entities.Compra;
 import com.backend.services.impl.CompraServiceImpl;
 
+
 @RestController
 @RequestMapping("/compra")
 public class CompraController {
@@ -45,4 +46,20 @@ public class CompraController {
         compraService.eliminar(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/liquidar/{compraId}")
+    public ResponseEntity<Compra> liquidarCompra(@PathVariable Long compraId) {
+        return  new ResponseEntity<>(compraService.liquidarCompra(compraId), HttpStatus.CREATED);
+    }
+    
+    @GetMapping("/find/gestionando")
+    public ResponseEntity<List<Compra>> getGestionando() {
+        return new ResponseEntity<>(compraService.comprasEnGestionando(), HttpStatus.OK);
+    }
+
+    @GetMapping("/find/liquidado")
+    public ResponseEntity<List<Compra>> getLiquidado() {
+        return new ResponseEntity<>(compraService.comprasEnLiquidado(), HttpStatus.OK);
+    }
+
 }

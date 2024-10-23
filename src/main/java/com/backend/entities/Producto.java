@@ -27,8 +27,6 @@ public class Producto {
     private String descripcion;
     
     private String codigoDeBarras;
-    
-    private Double precio;
 
     private Integer stock;
     

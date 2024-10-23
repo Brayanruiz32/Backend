@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.backend.entities.Caja;
+import com.backend.entities.DetalleCompra;
 import com.backend.entities.DetalleVenta;
 import com.backend.entities.Producto;
 import com.backend.entities.Venta;
+import com.backend.repositories.CajaRepository;
+import com.backend.repositories.DetalleCompraRepository;
 import com.backend.repositories.ProductoRepository;
 import com.backend.repositories.VentaRepository;
 import com.backend.services.IService;
@@ -21,6 +25,9 @@ public class VentaServiceImpl implements IService<Venta> {
     private final VentaRepository ventaRepository;
     private ProductoServiceImpl productoServiceImpl;
     private final ProductoRepository productoRepository;
+    private DetalleCompraRepository detalleCompraRepository;
+    private CajaServiceImpl cajaServiceImpl;
+    private CajaRepository cajaRepository;
 
     @Override
     public List<Venta> encontrarTodo() {
@@ -34,10 +41,19 @@ public class VentaServiceImpl implements IService<Venta> {
     
     @Override
     public Venta crear(Venta data) {
+        //validar apertura de caja
+        Caja cajaAbierta = cajaServiceImpl.verificarCajaAbierta();
+        if (cajaAbierta == null) {
+            throw new RuntimeException("La caja no se encuentra abierta");
+        }
+        
         Venta nuevaVenta = new Venta();
-
         List<DetalleVenta> detallesVentas = data.getDetalleVentas();       
+        double total = detallesVentas.stream().mapToDouble(DetalleVenta::getSubtotal).sum();
 
+        double saldoActual = cajaAbierta.getSaldoActual() + total;
+        cajaAbierta.setSaldoActual(saldoActual);
+        
         //mermar el stock
         for (DetalleVenta detalleVenta : detallesVentas) {
             Producto producto = productoServiceImpl.encontrar(detalleVenta.getProducto().getId());
@@ -48,13 +64,13 @@ public class VentaServiceImpl implements IService<Venta> {
             producto.setStock(stock);
             productoRepository.save(producto);
         }
-
+        
+        cajaRepository.save(cajaAbierta);
         //setear valores
-        double total = detallesVentas.stream().mapToDouble(DetalleVenta::getSubtotal).sum();
         nuevaVenta.setDetalleVentas(detallesVentas);
         nuevaVenta.setTotal(total);
-        nuevaVenta.setFecha(data.getFecha());
-
+        nuevaVenta.setFechaVenta(data.getFechaVenta());
+        //se debe sumar a la caja el total 
         return ventaRepository.save(nuevaVenta);
     }
     
@@ -67,9 +83,8 @@ public class VentaServiceImpl implements IService<Venta> {
 
         ventaActualizar.setDetalleVentas(detallesVentas);
         ventaActualizar.setTotal(total);
-        ventaActualizar.setFecha(data.getFecha());
+        ventaActualizar.setFechaVenta(data.getFechaVenta());
         
-
         return ventaRepository.save(ventaActualizar);
     }
 
@@ -79,4 +94,11 @@ public class VentaServiceImpl implements IService<Venta> {
         ventaRepository.delete(ventaEliminar);
     }
 
+    //obtener precio de venta (va ser un endpoint)
+    public Double obtenerPrecioVentaPorId(Long productoId){
+        DetalleCompra precioCompra = detalleCompraRepository.findTopByProductoIdOrderByIdDesc(productoId);
+        Double precioVenta = precioCompra.getPrecioCompra() * 1.15;
+        return precioVenta;
+        // return null;
+    }
 }
