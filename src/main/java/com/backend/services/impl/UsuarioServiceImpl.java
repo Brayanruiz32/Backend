@@ -90,7 +90,9 @@ public class UsuarioServiceImpl implements IService<Usuario>, UserDetailsService
 
         String token = jwtUtils.createToken(authentication);
 
-        ResponseLogin responseLogin = new ResponseLogin(usuario, token);
+        Usuario user = usuarioRepository.findByUsuario(usuario).orElseThrow(() -> new UsernameNotFoundException("No existe el usuario"));
+
+        ResponseLogin responseLogin = new ResponseLogin(usuario, user.getId(), token);
 
         return responseLogin;
     }

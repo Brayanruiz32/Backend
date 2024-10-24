@@ -12,6 +12,6 @@ import lombok.Setter;
 public class ResponseLogin {
 
     private String usuario; 
-    
+    private Long usuarioId;
     private String token;
 }
