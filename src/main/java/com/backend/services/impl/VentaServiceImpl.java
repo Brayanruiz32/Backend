@@ -70,6 +70,10 @@ public class VentaServiceImpl implements IService<Venta> {
         nuevaVenta.setDetalleVentas(detallesVentas);
         nuevaVenta.setTotal(total);
         nuevaVenta.setFechaVenta(data.getFechaVenta());
+        nuevaVenta.setNumeroDocumento(data.getNumeroDocumento());
+        nuevaVenta.setTipoComprobante(data.getTipoComprobante());
+        nuevaVenta.setTipoDocumento(data.getTipoDocumento());
+        nuevaVenta.setTipoPago(data.getTipoPago());
         //se debe sumar a la caja el total 
         return ventaRepository.save(nuevaVenta);
     }
@@ -84,6 +88,10 @@ public class VentaServiceImpl implements IService<Venta> {
         ventaActualizar.setDetalleVentas(detallesVentas);
         ventaActualizar.setTotal(total);
         ventaActualizar.setFechaVenta(data.getFechaVenta());
+        ventaActualizar.setNumeroDocumento(data.getNumeroDocumento());
+        ventaActualizar.setTipoComprobante(data.getTipoComprobante());
+        ventaActualizar.setTipoDocumento(data.getTipoDocumento());
+        ventaActualizar.setTipoPago(data.getTipoPago());
         
         return ventaRepository.save(ventaActualizar);
     }

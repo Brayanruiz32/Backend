@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,10 +36,13 @@ public class Venta {
 
     private LocalDate fechaVenta;
 
+    @Enumerated(EnumType.STRING)
     private TipoPago tipoPago;
 
+    @Enumerated(EnumType.STRING)
     private TipoComprobante tipoComprobante;
 
+    @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento;
 
     private String numeroDocumento;
