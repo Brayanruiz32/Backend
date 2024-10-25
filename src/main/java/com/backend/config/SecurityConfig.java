@@ -46,7 +46,7 @@ public class SecurityConfig {
             http.requestMatchers(HttpMethod.POST, "/autenticacion/login").permitAll();
             http.requestMatchers(HttpMethod.POST, "/usuario/create").permitAll();
 
-            String[] paths = {"/venta/**", "/producto/**", "/compra/**"};
+            String[] paths = {"/venta/**", "/producto/**", "/compra/**", "/caja/**", "/detalleventa/**"};
             String[] roles = {"ADMINISTRADOR", "VENDEDOR"};
             for (String path : paths) {
                 http.requestMatchers(HttpMethod.GET, path).hasAnyRole(roles);
@@ -54,7 +54,7 @@ public class SecurityConfig {
                 http.requestMatchers(HttpMethod.PUT, path).hasAnyRole(roles);
                 http.requestMatchers(HttpMethod.DELETE, path).hasAnyRole(roles);
             }
-            http.anyRequest().hasRole("ADMINISTRADOR");
+            http.anyRequest().hasAnyRole("ADMINISTRADOR", "VENDEDOR");
         })
         .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
         .build();
