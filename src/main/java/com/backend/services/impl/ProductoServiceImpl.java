@@ -65,4 +65,7 @@ public class ProductoServiceImpl implements  IService<Producto> {
 
     }
 
+    public List<Producto> buscarProducto(String nombre){
+        return productoRepository.findAllByName(nombre);
+    }
 }

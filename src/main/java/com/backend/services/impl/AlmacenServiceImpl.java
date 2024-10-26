@@ -45,4 +45,8 @@ public class AlmacenServiceImpl implements IService<Almacen>{
         Almacen almacenEliminar = this.encontrar(id);
         almacenRepository.delete(almacenEliminar);
     }
+
+    public List<Almacen> listarAlmacenesNoSeleccionados(Long almacenId){
+        return almacenRepository.findAllExcludingId(almacenId);
+    }
 }

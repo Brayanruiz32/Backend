@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.entities.Producto;
-import com.backend.services.IService;
+import com.backend.services.impl.ProductoServiceImpl;
 
 @RestController
 @RequestMapping("/producto")
 public class ProductoController {
 
     @Autowired
-    private IService<Producto> productoService;
+    private ProductoServiceImpl productoService;
 
     @GetMapping("/find/{id}")
     public ResponseEntity<Producto> find(@PathVariable Long id){
@@ -31,6 +31,10 @@ public class ProductoController {
     @GetMapping("/find/all")
     public ResponseEntity<List<Producto>> findAll(){
         return new ResponseEntity<>(productoService.encontrarTodo(), HttpStatus.OK);
+    }
+    @GetMapping("/search/{productName}")
+    public ResponseEntity<List<Producto>> findProductName(@PathVariable String productName){
+        return new ResponseEntity<>(productoService.buscarProducto(productName), HttpStatus.OK);
     }
     @PostMapping("/create")
     public ResponseEntity<Producto> create(@RequestBody Producto producto){

@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.entities.Almacen;
-import com.backend.services.IService;
+import com.backend.services.impl.AlmacenServiceImpl;
 
 @RestController
 @RequestMapping("/almacen")
 public class AlmacenController {
 
     @Autowired
-    private IService<Almacen> almacenService;
+    private AlmacenServiceImpl almacenService;
 
     @GetMapping("/find/{id}")
     public ResponseEntity<Almacen> find(@PathVariable Long id){
@@ -32,6 +32,12 @@ public class AlmacenController {
     public ResponseEntity<List<Almacen>> findAll(){
         return new ResponseEntity<>(almacenService.encontrarTodo(), HttpStatus.OK);
     }
+
+    @GetMapping("/listar/{almacenId}")
+    public ResponseEntity<List<Almacen>> listarAlmacenesNoSeleccionados(@PathVariable Long almacenId){
+        return new ResponseEntity<>(almacenService.listarAlmacenesNoSeleccionados(almacenId), HttpStatus.OK);
+    } 
+
     @PostMapping("/create")
     public ResponseEntity<Almacen> create(@RequestBody Almacen almacen){
         return new ResponseEntity<>(almacenService.crear(almacen), HttpStatus.CREATED);

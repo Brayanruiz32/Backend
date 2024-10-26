@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.entities.Caja;
 import com.backend.services.impl.CajaServiceImpl;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @RestController
 @RequestMapping("/caja")
 public class CajaController {
@@ -37,8 +39,13 @@ public class CajaController {
     }
 
     @GetMapping("/verificarCajaAbierta")
-    public ResponseEntity<Caja> verificar() {
-        return new ResponseEntity<>(cajaServiceImpl.verificarCajaAbierta(), HttpStatus.OK);
+    public ResponseEntity<?> verificar() {
+        try {
+            Caja caja = cajaServiceImpl.verificarCajaAbierta();
+            return new ResponseEntity<>(caja, HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>("La caja no esta abierta", HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/vendedor/{id}")
