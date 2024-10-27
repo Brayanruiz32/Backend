@@ -26,6 +26,12 @@ public class CajaController {
     @Autowired
     private CajaServiceImpl cajaServiceImpl;
 
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Caja> find(@PathVariable Long id){
+        return new ResponseEntity<>(cajaServiceImpl.encontrar(id), HttpStatus.OK);
+    }
+
+
     //aqui envia fecha_apertura y saldo inicial
     @PostMapping("/abrir")
     public ResponseEntity<Caja> abrirCaja(@RequestBody Caja caja){

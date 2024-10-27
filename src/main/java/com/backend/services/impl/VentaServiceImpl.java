@@ -74,6 +74,7 @@ public class VentaServiceImpl implements IService<Venta> {
         nuevaVenta.setTipoComprobante(data.getTipoComprobante());
         nuevaVenta.setTipoDocumento(data.getTipoDocumento());
         nuevaVenta.setTipoPago(data.getTipoPago());
+        nuevaVenta.setCaja(data.getCaja());
         //se debe sumar a la caja el total 
         return ventaRepository.save(nuevaVenta);
     }
