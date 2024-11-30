@@ -8,4 +8,7 @@ public interface DetalleCompraRepository extends JpaRepository<DetalleCompra, Lo
 
     DetalleCompra findTopByProductoIdOrderByIdDesc(Long productoId);
 
+
+//    List<DetalleCompra> listarProductosAVencer();
+
 }

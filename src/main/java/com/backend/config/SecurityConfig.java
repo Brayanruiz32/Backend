@@ -65,8 +65,8 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true); 
-        config.setAllowedOrigins(Arrays.asList("http://localhost:4200/"));
-        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type","*"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
         source.registerCorsConfiguration("/**", config);
